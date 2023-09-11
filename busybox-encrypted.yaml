@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: busybox-encrypted
+  name: busybox-encrypted
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busybox-encrypted
+  template:
+    metadata:
+      labels:
+        app: busybox-encrypted
+    spec:
+      runtimeClassName: kata-remote
+      containers:
+      - image: ghcr.io/mkulke/busybox-encrypted:asg23-demo
+        name: busybox
+        command: ["sleep", "infinity"]
